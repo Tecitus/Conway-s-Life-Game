@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Conway
+namespace ConwayGame
 {
     class Grid<T>{
 		public T[,] grid;
@@ -29,24 +29,47 @@ namespace Conway
 	class Game{
 		public Grid<bool> grid;
 		float tick;
+        public string[] Output;
 		public void NewGrid(int x,int y){
 			grid = new Grid<bool> (x, y);
 		}
 
-		public void Draw(Grid<bool> grid){
+        public Game(int x, int y)
+        {
+            grid = new Grid<bool>(x, y);
+        }
+
+        public void Draw(Grid<bool> grid) {
+            char[] a = { '\n', '\n' };
+            int l = 0;
+            Output = new string[grid.GetY()];
 			for (int i = 0; i < grid.GetX (); i++) {
 				for (int k = 0; k < grid.GetY (); k++) {
-					if (grid [k, i] == true)
-						Console.Write ('■');
-					else
-						Console.Write ('□');
-				}
-				Console.Write ('\n');
-			}
+                    if (grid[k, i] == true)
+                        Output[l] += "■";
+                    else
+
+                        Output[l] += "□";
+                    
+
+                }
+                l++;
+            }
 		}
 
 
-
+        public void RandomCell()
+        {
+            Random random = new Random();
+            for(int i = 0; i < grid.GetX(); i++)
+            {
+                for(int k = 0; k < grid.GetY(); k++)
+                {
+                    if (random.Next(0, 10000) > 9500)
+                        grid.grid[i, k] = true;
+                }
+            }
+        }
 
 
 
