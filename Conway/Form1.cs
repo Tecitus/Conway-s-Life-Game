@@ -16,7 +16,7 @@ namespace Conway
         public Form1()
         {
             InitializeComponent();
-            int X = 8, Y = 8;
+            int X = 16, Y = 16;
             game = new Game(X, Y);
               textBox1.Lines = game.Output;
         }
@@ -33,6 +33,16 @@ namespace Conway
             game.RandomCell();
             game.Draw(game.grid);
             textBox1.Lines = game.Output;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            game.NewGrid(Convert.ToInt32(textBox2.Text), game.grid.GetY());
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            game.NewGrid(game.grid.GetX(), Convert.ToInt32(textBox3.Text));
         }
     }
 }
